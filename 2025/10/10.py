@@ -22,11 +22,9 @@ def unpress_button(buttons, current_config):
 
 
 def calculate_min_button_presses(row):
-    print(row)
     current_config = [0] * len(row["res"])
     res = [float("inf")]
     active_buttons = [0]
-    buttons_pressed = []
     def backtrack(index):
         if active_buttons[0] > res[0]:
             return
@@ -36,12 +34,10 @@ def calculate_min_button_presses(row):
             return
         backtrack(index + 1)
         press_button(row["buttons"][index], current_config)
-        buttons_pressed.append(index)
         active_buttons[0] += 1
         backtrack(index + 1)
         unpress_button(row["buttons"][index], current_config)
         active_buttons[0] -= 1
-        buttons_pressed.pop()
 
     backtrack(0)
 
